@@ -40,7 +40,7 @@
 		</div>
 
 		<div class="col-md-6">
-			<a id = "pedidos" href="ControladorCesta&boton=VERPEDIDOS">
+			<a id = "pedidos" href="ControladorCesta?boton=VERPEDIDOS">
 				<button name = "pedido">PEDIDOS</button>
 			</a>
 		</div>

@@ -85,9 +85,11 @@ public class ControladorCesta extends HttpServlet {
 		} else if (request.getParameter("boton").equals("VERPEDIDOS")) {
 
 			try {
-				rs = c.query("SELECT p.id,pr.nombre, pr.peso, pr.precio" + "from cliente c " + "inner join pedido p on p.cliente_id=c.id "
+				String consulta = "SELECT p.id,pr.nombre, pr.peso, pr.precio from cliente c inner join pedido p on p.cliente_id=c.id "
 						+ "inner join pedido_producto pp on pp.pedido_id=p.id "
-						+ "INNER join producto pr on pp.producto_id=pr.id " + "where c.id=" + cliente_id);
+						+ "INNER join producto pr on pp.producto_id=pr.id " + "where c.id=" + cliente_id;
+				System.out.println (consulta);
+				rs = c.query(consulta);
 
 				// Tengo que mandar al usuario a una vista
 				if(rs.next()){
