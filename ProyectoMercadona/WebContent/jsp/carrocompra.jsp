@@ -41,7 +41,9 @@
 	</div>
 
 	<div class="container text-center">
-		<div class="row col-sm-12">
+		<div class="row col-md-6">
+		
+		<h3>PEDIDOS SIN CONFIRMAR</h3>
 
 			<%
 				ResultSet datos = (ResultSet) request.getAttribute("productosquepaso");
@@ -49,18 +51,45 @@
 					int id = datos.getInt("id");
 			%>
 
-			<p><%=datos.getString("id")%></p>
-			<p><%=datos.getString("nombre")%></p>
-			<p>
-				Peso:
-				<%=datos.getString("peso")%></p>
-			<p>
-				Precio:
+			<p><%=datos.getString("id")%>,
+				<%=datos.getString("nombre")%>, PESO:
+				<%=datos.getString("peso")%>, PRECIO:
 				<%=datos.getString("precio")%></p>
+
 
 			<%
 				}
 			%>
+		</div>
+
+		<div class="row col-md-6">
+			
+			<h3>PEDIDOS CONFIRMADOS</h3>
+			
+			<%
+				ResultSet datos_confirmados = (ResultSet) request.getAttribute("pedidosconfirmados");
+				while (datos_confirmados.next()) {
+					int id = datos_confirmados.getInt("id");
+			%>
+
+			<p><%=datos_confirmados.getString("id")%>,
+				<%=datos_confirmados.getString("nombre")%>, PESO:
+				<%=datos_confirmados.getString("peso")%>, PRECIO:
+				<%=datos_confirmados.getString("precio")%></p>
+
+
+			<%
+				}
+				%>
+			
+		</div>
+
+		<div class="row col-md-12">
+
+			<a id="confirmar_pedido"
+				href="ControladorCesta?boton=CONFIRMARPEDIDOS">
+				<button name="Confirmar_compra">CONFIRMAR PEDIDO</button>
+			</a>
 		</div>
 	</div>
 

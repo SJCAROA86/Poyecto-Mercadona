@@ -87,15 +87,24 @@ public class ControladorCesta extends HttpServlet {
 			try {
 				String consulta = "SELECT p.id,pr.nombre, pr.peso, pr.precio from cliente c inner join pedido p on p.cliente_id=c.id "
 						+ "inner join pedido_producto pp on pp.pedido_id=p.id "
-						+ "INNER join producto pr on pp.producto_id=pr.id " + "where c.id=" + cliente_id;
-				System.out.println (consulta);
+						+ "INNER join producto pr on pp.producto_id=pr.id " + "where p.confirmado = 0 and c.id=" + cliente_id;
+				
 				rs = c.query(consulta);
+				
+				consulta = "SELECT p.id,pr.nombre, pr.peso, pr.precio from cliente c inner join pedido p on p.cliente_id=c.id "
+						+ "inner join pedido_producto pp on pp.pedido_id=p.id "
+						+ "INNER join producto pr on pp.producto_id=pr.id " + "where p.confirmado = 1 and c.id=" + cliente_id;
+				
+				ResultSet rs_confirmados = c.query(consulta);
 
 				// Tengo que mandar al usuario a una vista
-				if(rs.next()){
+				if(rs.next()  || rs_confirmados.next()){// si uno u otro tienen información ||==OR
 					
 					request.setAttribute("productosquepaso", rs);
+					request.setAttribute("pedidosconfirmados", rs_confirmados);
 					request.getRequestDispatcher("jsp/carrocompra.jsp").forward(request, response);	
+				}else {
+					response.sendRedirect("ControladorProductos");
 				}
 				
 
@@ -103,6 +112,23 @@ public class ControladorCesta extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+		}else if (request.getParameter("boton").equals("CONFIRMARPEDIDOS")) {
+			
+			try {
+				
+				int ok = c.insert("UPDATE pedido set confirmado = 1 WHERE cliente_id = "+cliente_id+" and confirmado = 0");
+				if(ok != 0){
+					response.sendRedirect("jsp/menu.jsp");
+				}else {
+					response.sendRedirect("index.jsp");
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 
 	}

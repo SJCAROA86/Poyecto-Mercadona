@@ -34,7 +34,8 @@
 		</div>
 	</div>
 	<div class="container text-center">
-		<div class="row" id = "imagen">
+	 
+		<div class="row" id = "imagenes">
 
 			<%
 				ResultSet productos = (ResultSet) request.getAttribute("productos");
@@ -46,11 +47,9 @@
 			<div class="col-sm-4">
 
 				<h3><%=productos.getString("nombre")%></h3>
-				<a href ="DetalleProducto?idp=<%=id%>"><img alt="no load" src="<%=productos.getString("image")%>"></a>
-					
+				<a href ="DetalleProducto?idp=<%=id%>"><img class="imgProd"  alt="no load" src="<%=productos.getString("image")%>"></a>				
 
 			</div>
-
 
 			<%
 				}
@@ -58,7 +57,16 @@
 
 
 		</div>
+		
+		
 	</div>
+	<div class = "row text-left">
+		
+		<a id = "volvermenu" href="ControladorProductos?boton=VOLVER">
+				<button name = "gottamenu">VOLVER A MENÚ</button>
+			</a>
+		
+		</div>
 
 
 </body>

@@ -38,22 +38,28 @@ public class ControladorProductos extends HttpServlet {
 		ResultSet rs = null;// la variable donde vamos a meter los datos de la
 							// bbdd está vacia
 
-		try {
+		
+		 if (request.getAttribute("boton") != null) {
+			 response.sendRedirect("jsp/menu.jsp");
+		 }else {
 
-			rs = c.query("select * from producto");// la rellenamos con datos de
-													// la bbdd
-			if (rs.next()) {
-				System.out.println("entra");
-				request.setAttribute("productos", rs);//la cajita con datos rs
-				request.getRequestDispatcher("jsp/tienda.jsp").forward(request, response);//a donde mandamos la cajita
-			}else{
-				response.sendRedirect("jsp/menu.jsp");
-			}
+				try {
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+					rs = c.query("select * from producto");// la rellenamos con datos de
+															// la bbdd
+					if (rs.next()) {
+						System.out.println("entra");
+						request.setAttribute("productos", rs);//la cajita con datos rs
+						request.getRequestDispatcher("jsp/tienda.jsp").forward(request, response);//a donde mandamos la cajita
+					}else{
+						response.sendRedirect("jsp/menu.jsp");
+					}
+
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}			 
+		 }
 
 	}
 
