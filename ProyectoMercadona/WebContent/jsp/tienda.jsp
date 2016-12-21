@@ -60,7 +60,7 @@
 		
 		
 	</div>
-	<div class = "row text-left">
+	<div class = "row text-right">
 		
 		<a id = "volvermenu" href="ControladorProductos?boton=VOLVER">
 				<button name = "gottamenu">VOLVER A MENÚ</button>

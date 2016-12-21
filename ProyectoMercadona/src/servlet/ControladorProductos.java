@@ -39,8 +39,9 @@ public class ControladorProductos extends HttpServlet {
 							// bbdd está vacia
 
 		
-		 if (request.getAttribute("boton") != null) {
+		 if (request.getParameter("boton") != null) {
 			 response.sendRedirect("jsp/menu.jsp");
+			 
 		 }else {
 
 				try {
@@ -48,7 +49,7 @@ public class ControladorProductos extends HttpServlet {
 					rs = c.query("select * from producto");// la rellenamos con datos de
 															// la bbdd
 					if (rs.next()) {
-						System.out.println("entra");
+						
 						request.setAttribute("productos", rs);//la cajita con datos rs
 						request.getRequestDispatcher("jsp/tienda.jsp").forward(request, response);//a donde mandamos la cajita
 					}else{

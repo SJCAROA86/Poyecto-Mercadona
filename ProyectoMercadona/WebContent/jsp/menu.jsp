@@ -34,7 +34,7 @@
 	<div class="row text-center">
 
 		<div class="col-md-6">
-			<a id = "productos" href="ControladorProductos">
+			<a id = "productos" href="/ProyectoMercadona/ControladorProductos">
 				<button name = "producto">PRODUCTOS</button>
 			</a>
 		</div>
